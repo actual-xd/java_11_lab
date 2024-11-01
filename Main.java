@@ -31,7 +31,7 @@ public class Main {
                     processor.write(book);
                     break;
                 case 2:
-                    processor.print();
+                    processor.print();  // не смотреть библиотеку без создания файла ;))))))
                     break;
                 case 3:
                     System.out.print("Введите название книги, которую нужно удалить: ");
