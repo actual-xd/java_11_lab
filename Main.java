@@ -1,11 +1,14 @@
+import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws FileNotFoundException {
         int state = 0;
+        Scanner scanner = new Scanner(System.in);
+        FileProcessor processor = new FileProcessor();
         while (state != 4) {
-            Scanner scanner = new Scanner(System.in);
-            System.out.println("Добро пожаловать в библиотеку!");
+
+            System.out.println("\nДобро пожаловать в библиотеку!");
             System.out.println("Выберите действие:");
             System.out.println("1. Добавить книгу");
             System.out.println("2. Посмотреть книги");
@@ -16,14 +19,25 @@ public class Main {
             state = scanner.nextInt();
             switch (state) {
                 case 1:
-                    Book book = new Book();
-                    book.insert();
+                    System.out.print("Введите название книги: ");
+                    String name = scanner.next();
+                    System.out.print("Введите автора книги: ");
+                    String author = scanner.next();
+                    System.out.print("Введите год публикации книги: ");
+                    long year_published = Long.parseLong(scanner.next());
+                    System.out.print("Введите жанр книги: ");
+                    String genre = scanner.next();
+                    Book book = new Book(name, author, year_published, genre);
+                    processor.write(book);
                     break;
                 case 2:
-                    System.out.println("xd");
+                    processor.print();
                     break;
                 case 3:
-
+                    System.out.print("Введите название книги, которую нужно удалить: ");
+                    String lineToRemove = scanner.next();
+                    processor.delete(lineToRemove);
+                    break;
                 case 4:
                     System.out.println("Выход...");
                     break;
@@ -31,5 +45,6 @@ public class Main {
                     System.out.println("Неверный ввод! Попробуйте еще раз.");
             }
         }
+        scanner.close();
     }
 }
